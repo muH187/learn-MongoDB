@@ -8,27 +8,28 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body class="w-full h-full bg-zinc-800">
-    <div class="p-10 text-white">
-        <h1 class="text-3xl mb-8 tracking-tighter">All Users</h1>
+    <div class="p-8 text-white">
+        <a class="text-blue-500 " href="/">Back To Home</a>
+        <h1 class="text-3xl mb-8 mt-3 tracking-tighter">All Users</h1>
         <div class="users flex gap-3 flex-wrap">
-            <div class="user w-72 p-4 bg-zinc-900 rounded-lg">
-                <div class="w-full h-52 bg-zinc-600 rounded-lg"></div>
-                <h1 class="text-xl mt-3 tracking-tighter">Muhammad Ali</h1>
-                <h2 class="text-zinc-500">ali@gmail.com</h2>
-                <div class="flex gap-3 mt-3" >
-                    <a class="text-zinc-400" href="">Edit User</a>
-                    <a class="text-zinc-400" href="">Delete User</a>
-                </div>
-            </div>
-            <div class="user w-72 p-4 bg-zinc-900 rounded-lg">
-                <div class="w-full h-52 bg-zinc-600 rounded-lg"></div>
-                <h1 class="text-xl mt-3 tracking-tighter">Muhammad Ali</h1>
-                <h2 class="text-zinc-500">ali@gmail.com</h2>
-                <div class="flex gap-3 mt-3" >
-                    <a class="text-zinc-400" href="">Edit User</a>
-                    <a class="text-zinc-400" href="">Delete User</a>
-                </div>
-            </div>
+            <% if(users.length > 0){ %>
+                <% users.forEach(function(user){ %>
+                    <div class="user w-72 p-4 bg-zinc-900 rounded-lg">
+                        <div class="w-full h-52 bg-zinc-600 rounded-lg overflow-hidden">
+                            <img class="w-full h-full object-cover" src="<%= user.image %>" alt="">
+                        </div>
+                        <h1 class="text-xl mt-3 tracking-tighter"><%= user.name %></h1>
+                        <h2 class="text-zinc-500"><%= user.email %></h2>
+                        <div class="flex gap-3 mt-3" >
+                            <a class="text-zinc-400" href="">Edit User</a>
+                            <a class="text-zinc-400" href="/delete/<%= user._id %>">Delete User</a>
+                        </div>
+                    </div>
+                <% })%>
+           <% } else{ %>
+                <h3 class="text-zinc-400 text-3xl mt-8">No Users Here.</h3>
+          <% }%>
+            
         </div>
     </div>
 </body>
